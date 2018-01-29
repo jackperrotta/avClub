@@ -3,7 +3,7 @@
     $dsn = 'mysql:host=localhost;dbname=avclub';
     $username = 'avclub';
     $password = 'avclub123';
-    
+
     //this path can be used in place of relative references in HTML
-    $base_path = 'http://localhost/mis3502_avclub2';
+    $base_path = 'http://localhost/avclub';
 ?>

@@ -1,11 +1,5 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 function addRequest($teacher_id,$room,$problem_type,$comment){
     global $db;
     $sql = "INSERT INTO `requests`(`teacher_id`, `avtech_id`, `room`, `problem_type`, `status`, `comments`) VALUES "
@@ -17,7 +11,7 @@ function addRequest($teacher_id,$room,$problem_type,$comment){
     $statement->bindValue(':comment',$comment);
     $result = $statement->execute();
     $statement->closeCursor();
-    
+
     //result is true on success, false on error
     return $result;
 }
@@ -32,7 +26,7 @@ function getRequests($status){
     $result = $statement->fetchAll();
     $statement->closeCursor();
     //result is the array of results
-    return $result;    
+    return $result;
 }
 
 function closeRequest($request_id,$avtech_id){
@@ -43,7 +37,7 @@ function closeRequest($request_id,$avtech_id){
     $statement->bindValue(':request_id',$request_id);
     $result = $statement->execute();
     $statement->closeCursor();
-    
+
     //result is true on success, false on error
     return $result;
 }
@@ -56,7 +50,7 @@ function getRequestTypes(){
     $result = $statement->fetchAll();
     $statement->closeCursor();
     //result is the array of results
-    return $result;    
+    return $result;
 }
 
 
