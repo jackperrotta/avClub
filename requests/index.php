@@ -15,7 +15,7 @@ $problem_type = filter_input(INPUT_POST,'problem_type');
 $comment = filter_input(INPUT_POST,'comment');
 $requestTypes = getRequestTypes();
 
-        
+
 // if the list token was not provided, go back to the landing page
 if (!isset($_SESSION['LOGGED_IN'])){
     header('../index.php');
@@ -36,14 +36,17 @@ if (($_SESSION['TYPE'] == 'teacher') && (isset($_POST['ADDREQUEST']))){
     } else
     {
         $success = addRequest($teacher_id,$room,$problem_type,$comment);
-        if ($success === true)
+        if ($success == 'true')
             {
+            global $last_id;
+            $confirmation = 'T0000000' .$last_id;
+            addConfirmation($confirmation,$last_id);
             include 'request_confirm.php';
             exit();
             } else {
             $message = "An unexpected error occurred.";
             }
-        
+
     }
 }
 

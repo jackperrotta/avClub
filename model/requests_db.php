@@ -2,18 +2,33 @@
 
 function addRequest($teacher_id,$room,$problem_type,$comment){
     global $db;
+    global $last_id;
     $sql = "INSERT INTO `requests`(`teacher_id`, `avtech_id`, `room`, `problem_type`, `status`, `comments`) VALUES "
-            . " (:teacher_id, null, :room, :problem_type, 'In Progress', :comment)";
+            . " (?, null, ?, ?, 'In Progress', ?)";
     $statement = $db->prepare($sql);
-    $statement->bindValue(':teacher_id',$teacher_id);
-    $statement->bindValue(':room',$room);
-    $statement->bindValue(':problem_type',$problem_type);
-    $statement->bindValue(':comment',$comment);
+    $statement->bindValue(1,$teacher_id);
+    $statement->bindValue(2,$room);
+    $statement->bindValue(3,$problem_type);
+    $statement->bindValue(4,$comment);
     $result = $statement->execute();
+    $last_id = $db->lastInsertId();
     $statement->closeCursor();
 
-    //result is true on success, false on error
     return $result;
+
+}
+
+function addConfirmation($confirmation,$last_id){
+  global $db;
+  $sql = "UPDATE `requests` SET `confirmation`=:confirm WHERE `request_id`= :id";
+  $statement = $db->prepare($sql);
+  $statement->bindValue(':confirm',$confirmation);
+  $statement->bindValue(':id',$last_id);
+  $result = $statement->execute();
+  $statement->closeCursor();
+
+  //result is true on success, false on error
+  return $result;
 }
 
 function getRequests($status){

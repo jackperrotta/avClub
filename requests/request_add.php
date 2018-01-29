@@ -17,6 +17,14 @@
         <label for="problem_type">Problem Type:</label>
         <select id="problem_type" name="problem_type" class="form-control">
             <option value=''>Please make a choice</option>
+            <?php foreach ($requestTypes as $request) {
+              $request_name = $request['problem_type'];
+
+              echo "<option>"
+              . $request_name
+              ."</option>";
+            }
+            ?>
 
         </select><br>
         <label for="comment">Comment:</label>
@@ -24,12 +32,10 @@
 
       </div>
       <br>
-      <br>
 
-      <div id="buttons">
-      <input type="submit" value="Add Request" name="ADDREQUEST">
+      <button class="btn btn-primary" type="submit" name="ADDREQUEST">Add Request</button>
+      <!-- <input type="submit" value="Add Request" name="ADDREQUEST"> -->
       <br>
-      </div>
 
       <p class="error"><?php echo $message;?></p>
       </form>
