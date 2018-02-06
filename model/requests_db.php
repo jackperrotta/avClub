@@ -38,7 +38,7 @@ function getRequests($status){
     $statement = $db->prepare($sql);
     $statement->bindValue(':status',$status);
     $statement->execute();
-    $result = $statement->fetchAll();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     $statement->closeCursor();
     //result is the array of results
     return $result;
